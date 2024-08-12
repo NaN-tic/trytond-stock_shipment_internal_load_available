@@ -27,6 +27,8 @@ class ShipmentInternal(metaclass=PoolMeta):
             print(pbl)
             to_save = []
             for item in pbl.items():
+                if item[1] <= 0:
+                    continue
                 move = Move()
                 move.product = item[0][1]
                 move.lot = item[0][2]
