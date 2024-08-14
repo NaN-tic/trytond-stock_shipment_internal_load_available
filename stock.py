@@ -24,7 +24,6 @@ class ShipmentInternal(metaclass=PoolMeta):
         for record in records:
             pbl = Product.products_by_location([record.from_location.id],
             with_childs=False, grouping=('product', 'lot'))
-            print(pbl)
             to_save = []
             for item in pbl.items():
                 if item[1] <= 0:
