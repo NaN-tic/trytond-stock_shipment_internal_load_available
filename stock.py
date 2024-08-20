@@ -18,23 +18,23 @@ class ShipmentInternal(metaclass=PoolMeta):
 
     @classmethod
     @ModelView.button
-    def available_stock(cls, records):
+    def available_stock(cls, shipments):
         Product = Pool().get('product.product')
         Move = Pool().get('stock.move')
-        for record in records:
-            pbl = Product.products_by_location([record.from_location.id],
-            with_childs=False, grouping=('product', 'lot'))
-            to_save = []
-            for item in pbl.items():
-                if item[1] <= 0:
+        to_save = []
+        for shipment in shipments:
+            pbl = Product.products_by_location([shipment.from_location.id],
+                with_childs=False, grouping=('product', 'lot'))
+            for key, value in pbl.items():
+                if value <= 0:
                     continue
                 move = Move()
-                move.product = item[0][1]
-                move.lot = item[0][2]
-                move.quantity = item[1]
-                move.shipment = record
-                move.unit = Product(item[0][1]).default_uom
-                move.from_location = record.from_location
-                move.to_location = record.to_location
+                move.product = key[1]
+                move.lot = key[2]
+                move.quantity = value
+                move.shipment = shipment
+                move.unit = Product(key[1]).default_uom
+                move.from_location = shipment.from_location
+                move.to_location = shipment.to_location
                 to_save.append(move)
-            Move.save(to_save)
+        Move.save(to_save)
