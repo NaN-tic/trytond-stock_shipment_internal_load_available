@@ -10,11 +10,11 @@ class ShipmentInternal(metaclass=PoolMeta):
     def __setup__(cls):
         super().__setup__()
         cls._buttons.update({
-            'available_stock': {
-                'invisible': ~Eval('state').in_(['draft']),
-                'depends': ['state'],
-                },
-            })
+                'available_stock': {
+                    'invisible': ~Eval('state').in_(['draft']),
+                    'depends': ['state'],
+                    },
+                })
 
     @classmethod
     @ModelView.button
