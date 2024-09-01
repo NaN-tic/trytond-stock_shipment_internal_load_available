@@ -7,8 +7,4 @@ from . import stock
 def register():
     Pool.register(
         stock.ShipmentInternal,
-        module='stock_shipment_internal_move', type_='model')
-    Pool.register(
-        module='stock_shipment_internal_move', type_='wizard')
-    Pool.register(
-        module='stock_shipment_internal_move', type_='report')
+        module='stock_shipment_internal_load_available', type_='model')
