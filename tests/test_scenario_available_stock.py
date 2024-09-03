@@ -73,7 +73,6 @@ class Test(unittest.TestCase):
         shipment.click('receive')
         shipment.click('do')
         self.assertEqual(shipment.state, 'done')
-        moves = Move.find([])
 
         # create internal shipment frm input to storage location
         internal_shipment = ShipmentInternal()
@@ -81,5 +80,5 @@ class Test(unittest.TestCase):
         internal_shipment.to_location = storage_loc2
         self.assertEqual(internal_shipment.moves, [])
         internal_shipment.click('available_stock')
-        print(internal_shipment.moves)
         self.assertEqual(len(internal_shipment.moves), 1)
+        self.assertEqual(internal_shipment.moves[0].quantity, 10)
