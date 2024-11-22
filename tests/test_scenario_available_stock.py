@@ -4,7 +4,7 @@ from decimal import Decimal
 from proteus import Model
 from trytond.modules.company.tests.tools import create_company, get_company
 from trytond.tests.test_tryton import drop_db
-from trytond.tests.tools import activate_modules, assertNotEqual
+from trytond.tests.tools import activate_modules
 
 
 
@@ -33,7 +33,6 @@ class Test(unittest.TestCase):
         ShipmentIn = Model.get('stock.shipment.in')
         ShipmentInternal = Model.get('stock.shipment.internal')
         Party = Model.get('party.party')
-        Move = Model.get('stock.move')
 
         supplier = Party(name='Supplier')
         supplier.save()
