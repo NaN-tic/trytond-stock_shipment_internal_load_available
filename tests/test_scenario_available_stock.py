@@ -52,11 +52,11 @@ class Test(unittest.TestCase):
         supplier_loc, = Location.find([('code', '=', 'SUP')])
         input_loc, = Location.find([('code', '=', 'IN')])
         storage_loc, = Location.find([('code', '=', 'STO')])
-        
+
         # Create "storage 2" location
         storage_loc2 = Location(name='Storage 2', code='STO2')
         storage_loc2.save()
-        
+
 
         # Create a shipment::
 
