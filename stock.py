@@ -24,13 +24,12 @@ class ShipmentInternal(metaclass=PoolMeta):
         to_save = []
         for shipment in shipments:
             pbl = Product.products_by_location([shipment.from_location.id],
-                with_childs=False, grouping=('product', 'lot'))
+                with_childs=False, grouping=('product',))
             for key, value in pbl.items():
                 if value <= 0:
                     continue
                 move = Move()
                 move.product = key[1]
-                move.lot = key[2]
                 move.quantity = value
                 move.shipment = shipment
                 move.unit = Product(key[1]).default_uom
